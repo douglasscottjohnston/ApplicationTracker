@@ -8,5 +8,5 @@ setup(
     license='',
     author='Douglas Johnston',
     author_email='douglasscottjohnston@gmail.com',
-    description='Scans for application received emails in your inbox and tracks them in a csv'
+    description='Uses imaplib to search your inbox using queries in query_strings.txt, and moves them to the "Applications" folder'
 )
