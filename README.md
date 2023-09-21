@@ -15,5 +15,6 @@ Conda 23.1.0
 
 ## Future Improvements
 - Add a text classification model to classify application emails for better accuracy
+- Create a webhook instead of scanning the entire inbox every 5 minutes 
 - Differentiate application accepted and application declined emails
 - Add support for multiple/different email systems

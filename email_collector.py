@@ -41,7 +41,5 @@ class EmailCollector:
             query_strings = file.read().split('\n')
         email_ids = []
         for query in query_strings:
-            print(type(query))
-            print(query)
             email_ids.extend(self.__imap_connection.search(None, query)[1][0].split())
         return email_ids
