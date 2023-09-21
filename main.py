@@ -10,6 +10,7 @@ def main():
     response = input("Type 1, to scan your email once, or 2 to scan your email every 5 minutes: ")
     if response == "1":
         collector.scan_email()
+        print("Scan complete")
     else:
         print("Scanning email every 5 minutes, type Ctrl+C to stop")
         while True:
