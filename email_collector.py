@@ -1,4 +1,5 @@
 import imaplib
+from imaplib import IMAP4
 import re
 
 uid_pattern = re.compile(r'\d+ \(UID (?P<uid>\d+)\)')
@@ -10,8 +11,8 @@ class EmailCollector:
         self.__port = port
         self.__email_address = email_address
         self.__password = password
-        self.__imap_connection = imaplib.IMAP4_SSL(imap_url, self.__port)
-        self.__imap_connection.login(self.__email_address, self.__password)
+        self.__imap_url = imap_url
+        self.__login()
         self.__folder = "Applications"
         self.create_applications_folder()
 
@@ -41,5 +42,13 @@ class EmailCollector:
             query_strings = file.read().split('\n')
         email_ids = []
         for query in query_strings:
-            email_ids.extend(self.__imap_connection.search(None, query)[1][0].split())
+            try:
+                email_ids.extend(self.__imap_connection.search(None, query)[1][0].split())
+            except IMAP4.error:
+                self.__login()
+                email_ids.extend(self.__imap_connection.search(None, query)[1][0].split())
         return email_ids
+
+    def __login(self):
+        self.__imap_connection = imaplib.IMAP4_SSL(self.__imap_url, self.__port)
+        self.__imap_connection.login(self.__email_address, self.__password)
